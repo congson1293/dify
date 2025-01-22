@@ -951,6 +951,30 @@ services:
     volumes:
       - ./volumes/unstructured:/app/data
 
+  ollama:
+    image: ollama/ollama:0.5.7
+    container_name: ollama
+    volumes:
+      - ./volumes/ollama:/root/ollama
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    restart: always
+    environment:
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_NUM_PARALLEL: 2
+      OLLAMA_MAX_LOADED_MODELS: 1
+      OLLAMA_FLASH_ATTENTION: 0
+      OLLAMA_KEEP_ALIVE: 5
+      OLLAMA_DEBUG: 0
+      OLLAMA_ORIGINS: "*"
+      GIN_MODE: "release"
+    entrypoint: [ "/bin/sh", "-c", "ollama serve & ollama create llm -f /root/ollama/Modelfiles/Modelfile_llm && ollama create embedding -f /root/ollama/Modelfiles/Modelfile_embedding && tail -f /dev/null" ]
+    networks:
+      - ssrf_proxy_network
+      - default
+
+
 networks:
   # create a network between sandbox, api and ssrf_proxy, and can not access outside.
   ssrf_proxy_network:
@@ -965,3 +989,4 @@ networks:
 volumes:
   oradata:
   dify_es01_data:
+  ollama:

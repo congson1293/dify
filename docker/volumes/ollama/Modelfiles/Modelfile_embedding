@@ -1,0 +1,2 @@
+FROM /root/ollama/embedding_models/mxbai-embed-large-v1.fp16.bin
+#FROM /root/ollama/embedding_models/nomic-embed-text-v1.5.fp16.bin
