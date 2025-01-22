@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: repo.vps.com.vn/ollama/ollama:0.3.5
+    image: ollama/ollama:0.3.5
     container_name: ollama
     volumes:
       - ./resources:/root/llm_run
