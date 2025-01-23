@@ -1,4 +1,4 @@
-
+```json
 openapi: "3.0.0"
 info:
   version: 1.0.0
@@ -97,3 +97,4 @@ components:
           format: int32
         message:
           type: string
+```
